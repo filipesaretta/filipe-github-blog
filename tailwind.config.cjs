@@ -17,7 +17,7 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
-        'cover-top': "url('/public/cover.svg')",
+        'cover-top': "url('/cover.svg')",
       },
     },
   },
