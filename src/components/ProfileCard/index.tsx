@@ -6,7 +6,7 @@ import link from '../../assets/link-arrow.svg'
 
 export function ProfileCard() {
   return (
-    <div className="grid grid-cols-[auto_1fr] gap-x-3 max-w-4xl bg-base-profile rounded-lg mx-4 -mt-20 drop-shadow-2xl py-8 pl-3 sm:pl-10 pr-3 sm:pr-8 md:mx-auto">
+    <div className="grid grid-cols-[auto_1fr] gap-x-3  bg-base-profile rounded-lg -mt-20 drop-shadow-2xl py-8 pl-3 sm:pl-10 pr-3 sm:pr-8 mx-4">
       <img
         src={profilePic}
         alt=""

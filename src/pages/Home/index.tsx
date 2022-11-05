@@ -1,13 +1,15 @@
 import { ProfileCard } from '../../components/ProfileCard'
-import logo from '../../assets/logo.svg'
+import { PostList } from '../../components/PostsList'
+import { Header } from '../../components/Header'
 
 export default function Home() {
   return (
     <main className="h-screen bg-base-background">
-      <div className="bg-cover-top h-72 bg-no-repeat bg-cover grid justify-center">
-        <img src={logo} alt="Github Blog" className="mt-16" />
+      <Header />
+      <div className="max-w-4xl mx-auto">
+        <ProfileCard />
+        <PostList />
       </div>
-      <ProfileCard />
     </main>
   )
 }
