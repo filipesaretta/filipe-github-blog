@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import link from '../../assets/link-arrow.svg'
 import {
+  ArrowSquareOut,
   CalendarBlank,
   CaretLeft,
   ChatTeardrop,
@@ -26,7 +26,7 @@ export function Post() {
             className="flex gap-2 items-center uppercase text-blue font-bold text-xs col-start-2 row-start-1  h-fit hover:underline hover:underline-offset-4"
           >
             Ver no github
-            <img src={link} alt="" className="w-[12px]" />
+            <ArrowSquareOut size={14} weight="bold" color="#3294F8" />
           </a>
         </header>
         <h1 className="text-2xl text-base-title font-bold">
