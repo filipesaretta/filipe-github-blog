@@ -1,7 +1,5 @@
 import { Link } from 'react-router-dom'
 import link from '../../assets/link-arrow.svg'
-import calendar from '../../assets/calendar-day-solid.svg'
-import comments from '../../assets/comment-solid.svg'
 import {
   CalendarBlank,
   CaretLeft,

@@ -1,8 +1,5 @@
 import profilePic from '../../assets/me.jpg'
-import github from '../../assets/github-brands.svg'
-import building from '../../assets/building-solid.svg'
-import followers from '../../assets/user-group-solid.svg'
-import link from '../../assets/link-arrow.svg'
+import { ArrowSquareOut, Buildings, GithubLogo, Users } from 'phosphor-react'
 
 export function ProfileCard() {
   return (
@@ -28,19 +25,19 @@ export function ProfileCard() {
           className="flex gap-2 items-center uppercase text-blue font-bold text-xs col-start-2 row-start-1 self-start h-fit hover:underline hover:underline-offset-4"
         >
           github
-          <img src={link} alt="" className="w-[12px]" />
+          <ArrowSquareOut size={14} weight="bold" color="#3294F8" />
         </a>
         <div className="flex gap-4 row-start-3 self-end">
-          <span className="flex items-center gap-2 text-base-subtitle">
-            <img src={github} alt="Github Icon" className="w-[18px]" />
+          <span className="flex items-center gap-2 text-base-subtitle text-base">
+            <GithubLogo size={18} weight="fill" color="#3A536B" />
             filipesaretta
           </span>
-          <span className="flex items-center gap-2 text-base-subtitle">
-            <img src={building} alt="Building Icon" className="w-[18px]" />
+          <span className="flex items-center gap-2 text-base-subtitle text-base">
+            <Buildings size={18} weight="fill" color="#3A536B" />
             freelancer
           </span>
-          <span className="flex items-center gap-2 text-base-subtitle">
-            <img src={followers} alt="Followers Icon" className="w-[18px]" />
+          <span className="flex items-center gap-2 text-base-subtitle text-base">
+            <Users size={18} weight="fill" color="#3A536B" />
             32
           </span>
         </div>
