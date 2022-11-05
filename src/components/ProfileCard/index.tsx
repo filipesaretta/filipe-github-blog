@@ -6,7 +6,7 @@ import link from '../../assets/link-arrow.svg'
 
 export function ProfileCard() {
   return (
-    <div className="grid grid-cols-[auto_1fr] gap-x-3  bg-base-profile rounded-lg -mt-20 drop-shadow-2xl py-8 pl-3 sm:pl-10 pr-3 sm:pr-8 mx-4">
+    <div className="grid grid-cols-[auto_1fr] gap-x-3  bg-base-profile rounded-lg -mt-20 shadow-2xl py-8 pl-3 sm:pl-10 pr-3 sm:pr-8 mx-4">
       <img
         src={profilePic}
         alt=""
@@ -25,7 +25,7 @@ export function ProfileCard() {
           href="#"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex gap-2 items-center uppercase text-blue font-bold text-xs col-start-2 row-start-1 self-start h-fit"
+          className="flex gap-2 items-center uppercase text-blue font-bold text-xs col-start-2 row-start-1 self-start h-fit hover:underline hover:underline-offset-4"
         >
           github
           <img src={link} alt="" className="w-[12px]" />
