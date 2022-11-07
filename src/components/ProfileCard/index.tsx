@@ -9,13 +9,14 @@ interface Profile {
   followers: number
   location: string
   url: string
+  bio: string
 }
 
 export function ProfileCard() {
   const [profile, setProfile] = useState({} as Profile)
 
   const fetchProfile = async () => {
-    const response = await api.get('/filipesaretta')
+    const response = await api.get('/users/filipesaretta')
     setProfile(response.data)
   }
 
@@ -34,11 +35,7 @@ export function ProfileCard() {
         <h1 className="text-base-title self-start text-2xl mb-2">
           {profile.name}
         </h1>
-        <p className="text-base-text col-span-full">
-          Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu
-          viverra massa quam dignissim aenean malesuada suscipit. Nunc, volutpat
-          pulvinar vel mass.
-        </p>
+        <p className="text-base-text col-span-full">{profile.bio}</p>
         <a
           href={profile.url}
           target="_blank"
