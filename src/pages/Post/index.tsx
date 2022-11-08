@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import {
   ArrowSquareOut,
   CalendarBlank,
@@ -6,8 +6,34 @@ import {
   ChatTeardrop,
   GithubLogo,
 } from 'phosphor-react'
+import React, { useEffect, useState } from 'react'
+
+import ReactMarkdown from 'react-markdown'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+
+import { api } from '../../lib/axios'
+
+interface PostProps {
+  title: string
+  comments: string
+  body: string
+}
 
 export function Post() {
+  const { number } = useParams()
+  const [post, setPost] = useState({} as PostProps)
+
+  useEffect(() => {
+    async function fetchSinglePost() {
+      const response = await api.get(
+        `/repos/filipesaretta/filipe-github-blog/issues/${number}`,
+      )
+      setPost(response.data)
+    }
+    fetchSinglePost()
+  }, [number])
+
   return (
     <div className="max-w-4xl mx-auto">
       <div className=" bg-base-profile rounded-lg -mt-20 shadow-2xl p-8  sm:pl-10 pr-3 sm:pr-8 mx-4">
@@ -29,9 +55,7 @@ export function Post() {
             <ArrowSquareOut size={14} weight="bold" color="#3294F8" />
           </a>
         </header>
-        <h1 className="text-2xl text-base-title font-bold">
-          JavaScript data types and data structures
-        </h1>
+        <h1 className="text-2xl text-base-title font-bold">{post.title}</h1>
         <div className="flex gap-4 row-start-3 self-end mt-2">
           <span className="flex items-center gap-2 text-base-label">
             <GithubLogo size={18} weight="fill" color="#3A536B" />
@@ -43,19 +67,37 @@ export function Post() {
           </span>
           <span className="flex items-center gap-2 text-base-label">
             <ChatTeardrop size={18} weight="fill" color="#3A536B" />
-            32 comments
+            {post.comments}
           </span>
         </div>
       </div>
       <div className="mx-4 px-8 py-10">
-        <p className="text-base-text">
-          Programming languages all have built-in data structures, but these
-          often differ from one language to another. This article attempts to
-          list the built-in data structures available in JavaScript and what
-          properties they have. These can be used to build other data
-          structures. Wherever possible, comparisons with other languages are
-          drawn.
-        </p>
+        <div className="text-base-text">
+          <ReactMarkdown
+            components={{
+              code({ node, inline, className, children, ...props }) {
+                const match = /language-(\w+)/.exec(className || '')
+                return !inline && match ? (
+                  <SyntaxHighlighter
+                    // eslint-disable-next-line react/no-children-prop
+                    children={String(children).replace(/\n$/, '')}
+                    // @ts-expect-error
+                    style={atomDark}
+                    language={match[1]}
+                    PreTag="div"
+                    {...props}
+                  />
+                ) : (
+                  <code className={className} {...props}>
+                    {children}
+                  </code>
+                )
+              },
+            }}
+          >
+            {post.body}
+          </ReactMarkdown>
+        </div>
       </div>
     </div>
   )
