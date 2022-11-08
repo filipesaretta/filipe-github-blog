@@ -1,10 +1,13 @@
 import { BrowserRouter } from 'react-router-dom'
+import { PostsContextProvider } from './contexts/PostsContext'
 import { Router } from './Routes'
 
 function App() {
   return (
     <BrowserRouter>
-      <Router />
+      <PostsContextProvider>
+        <Router />
+      </PostsContextProvider>
     </BrowserRouter>
   )
 }
