@@ -4,6 +4,7 @@ import { PostsContext } from '../../contexts/PostsContext'
 
 export function PostList() {
   const { posts } = useContext(PostsContext)
+  // console.log(posts)
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mx-4 pb-8">
       {posts.map((post) => {
