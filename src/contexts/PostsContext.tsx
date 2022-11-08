@@ -14,6 +14,7 @@ interface PostsProps {
 
 interface PostsContextProps {
   posts: PostsProps[]
+  fetchSearchPosts: (query?: string) => Promise<void>
 }
 
 export const PostsContext = createContext({} as PostsContextProps)
@@ -21,17 +22,20 @@ export const PostsContext = createContext({} as PostsContextProps)
 export function PostsContextProvider({ children }: PostsContextProviderProps) {
   const [posts, setPosts] = useState([])
 
-  async function fetchPosts() {
-    const response = await api.get(
-      '/repos/filipesaretta/filipe-github-blog/issues',
-    )
-    setPosts(response.data)
+  async function fetchSearchPosts(query = '') {
+    const response = await api.get('/search/issues', {
+      params: { q: `${query}repo:filipesaretta/filipe-github-blog` },
+    })
+    setPosts(response.data.items)
   }
+
   useEffect(() => {
-    fetchPosts()
+    fetchSearchPosts()
   }, [])
 
   return (
-    <PostsContext.Provider value={{ posts }}>{children}</PostsContext.Provider>
+    <PostsContext.Provider value={{ posts, fetchSearchPosts }}>
+      {children}
+    </PostsContext.Provider>
   )
 }
