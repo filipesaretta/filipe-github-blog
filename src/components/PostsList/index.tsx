@@ -1,10 +1,11 @@
+import { formatDistanceToNow } from 'date-fns'
 import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { PostsContext } from '../../contexts/PostsContext'
 
 export function PostList() {
   const { posts } = useContext(PostsContext)
-  // console.log(posts)
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mx-4 pb-8">
       {posts.map((post) => {
@@ -16,7 +17,9 @@ export function PostList() {
                   {post.title}
                 </span>
                 <span className="text-sm text-base-span block self-start mt-2">
-                  Há 1 dia
+                  {formatDistanceToNow(new Date(post.created_at), {
+                    addSuffix: true,
+                  })}
                 </span>
               </div>
               <p className="text-base-text">

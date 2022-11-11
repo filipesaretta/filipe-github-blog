@@ -12,17 +12,26 @@ import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
+import { formatDistanceToNow } from 'date-fns'
 import { api } from '../../lib/axios'
+import { it } from 'date-fns/locale'
 
 interface PostProps {
   title: string
   comments: string
   body: string
+  html_url: string
+  created_at: string
 }
 
 export function Post() {
   const { number } = useParams()
   const [post, setPost] = useState({} as PostProps)
+  const dateFromCreatedToNow =
+    post.created_at &&
+    formatDistanceToNow(new Date(post.created_at), {
+      addSuffix: true,
+    })
 
   useEffect(() => {
     async function fetchSinglePost() {
@@ -33,6 +42,7 @@ export function Post() {
     }
     fetchSinglePost()
   }, [number])
+  console.log(post)
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -46,7 +56,7 @@ export function Post() {
             Voltar
           </Link>
           <a
-            href="#"
+            href={post.html_url}
             target="_blank"
             rel="noopener noreferrer"
             className="flex gap-2 items-center uppercase text-blue font-bold text-xs col-start-2 row-start-1  h-fit hover:underline hover:underline-offset-4"
@@ -63,7 +73,7 @@ export function Post() {
           </span>
           <span className="flex items-center gap-2 text-base-label">
             <CalendarBlank size={18} weight="fill" color="#3A536B" />
-            Há 1 dia
+            {dateFromCreatedToNow}
           </span>
           <span className="flex items-center gap-2 text-base-label">
             <ChatTeardrop size={18} weight="fill" color="#3A536B" />

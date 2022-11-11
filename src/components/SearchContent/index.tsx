@@ -22,7 +22,7 @@ export function SearchContent() {
   } = useForm<Inputs>({
     resolver: yupResolver(schema),
   })
-  const { fetchSearchPosts } = useContext(PostsContext)
+  const { posts, fetchSearchPosts } = useContext(PostsContext)
 
   async function handleSearchPost(data: Inputs) {
     return await fetchSearchPosts(data.query)
@@ -32,7 +32,7 @@ export function SearchContent() {
     <div className="mx-4 mt-[72px] mb-12">
       <div className="flex justify-between">
         <p className="text-base-subtitle mb-5 text-lg">Posts</p>
-        <span className="block text-base-span">6 posts</span>
+        <span className="block text-base-span">{posts.length} posts</span>
       </div>
       <form onSubmit={handleSubmit(handleSearchPost)}>
         <input
