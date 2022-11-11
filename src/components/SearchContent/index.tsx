@@ -15,16 +15,13 @@ const schema = yup
   .required()
 
 export function SearchContent() {
-  const {
-    register,
-    handleSubmit,
-    formState: { isSubmitting },
-  } = useForm<Inputs>({
+  const { register, handleSubmit, reset } = useForm<Inputs>({
     resolver: yupResolver(schema),
   })
   const { posts, fetchSearchPosts } = useContext(PostsContext)
 
   async function handleSearchPost(data: Inputs) {
+    reset()
     return await fetchSearchPosts(data.query)
   }
 
@@ -34,13 +31,16 @@ export function SearchContent() {
         <p className="text-base-subtitle mb-5 text-lg">Posts</p>
         <span className="block text-base-span">{posts.length} posts</span>
       </div>
-      <form onSubmit={handleSubmit(handleSearchPost)}>
+      <form onSubmit={handleSubmit(handleSearchPost)} className="flex">
         <input
           type="text"
           placeholder="Search for post..."
           {...register('query')}
-          className="w-full px-4 py-3 border-0 border-base-label outline-0 focus:ring-2 ring-blue rounded-lg  bg-base-input placeholder-base-label text-base-label"
+          className="w-full px-4 py-3 border-0 border-base-label outline-0 focus:ring-2 ring-blue rounded-tl-lg rounded-bl-lg  bg-base-input placeholder-base-label text-base-label"
         />
+        <button className="bg-base-span px-4 py-3 border-0 border-base-label outline-0 focus:ring-2 ring-blue  t placeholder-base-label text-base-input font-bold rounded-tr-lg rounded-br-lg">
+          Search
+        </button>
       </form>
     </div>
   )
